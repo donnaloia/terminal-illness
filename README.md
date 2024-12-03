@@ -1,10 +1,10 @@
 # Terminal Illness
 
-<img src="https://github.com/donnaloia/terminal-illness/blob/main/assets/img/screenshot.png" width="588" />
+<img src="https://github.com/donnaloia/terminal-illness/blob/main/assets/img/screenshot.png" width="604" />
 
 
 
-After building out REST API's for the past 15 years, I realized the need for a tool like this.  A tool that treats API Ops as a first class citizen.  I've never liked Postman, I've always though it was clunky, convoluted and had a poor user experience.  Terminal Illness aims to point the crosshairs at Postmans face, and pull the trigger with no mercy.  Terminal Illness is a tool that says fuck you to API testing as we know it.  It's time for a new tool, a swiss army knife of API Testing, API analysis, API security auditing and API load testing all in one.  Think your API can handle scale?  Let Terminal Illness find out by loading up the Schizophrenia module and blasting it with no mercy.
+After building out REST API's for the past 15 years, I realized the need for a tool like this.  A tool that treats API Ops as a first class citizen.  I've never liked Postman, I've always though it was clunky, convoluted and had a poor user experience.  Terminal Illness aims to point the crosshairs directly at Postmans face, and pull the trigger with no mercy.  Terminal Illness is a tool that says fuck you to API testing as we know it.  It's time for a new tool, a swiss army knife of API Testing, API analysis, API security auditing and API load testing all in one.  Think your API can handle scale?  Let Terminal Illness find out by loading up the Schizophrenia module and blasting it with no mercy.
 
 
 ## Getting Started
