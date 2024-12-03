@@ -1,6 +1,6 @@
 # Terminal Illness
 
-<img src="https://github.com/donnaloia/terminal-illness/blob/main/assets/img/screenshot.png" width="360" />
+<img src="https://github.com/donnaloia/terminal-illness/blob/main/assets/img/screenshot.png" width="588" />
 
 
 
