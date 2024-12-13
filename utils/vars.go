@@ -12,14 +12,20 @@ import (
 var (
 	GraffTitle = `
 
-	__                            .__                 .__     .__ .__   .__                                   
-	_/  |_   ____  _______   _____  |__|  ____  _____   |  |    |__||  |  |  |    ____    ____    ______  ______
-	\   __\_/ __ \ \_  __ \ /     \ |  | /    \ \__  \  |  |    |  ||  |  |  |   /    \ _/ __ \  /  ___/ /  ___/
-	 |  |  \  ___/  |  | \/|  Y Y  \|  ||   |  \ / __ \_|  |__  |  ||  |__|  |__|   |  \\  ___/  \___ \  \___ \ 
-	 |__|   \___  > |__|   |__|_|  /|__||___|  /(____  /|____/  |__||____/|____/|___|  / \___  >/____  >/____  >
-				\/               \/          \/      \/                             \/      \/      \/      \/ 
-	
+  __                            .__                 .__      .__ .__   .__                                   
+_/  |_   ____  _______   _____  |__|  ____  _____   |  |     |__||  |  |  |    ____    ____    ______  ______
+\   __\_/ __ \ \_  __ \ /     \ |  | /    \ \__  \  |  |     |  ||  |  |  |   /    \ _/ __ \  /  ___/ /  ___/
+ |  |  \  ___/  |  | \/|  Y Y  \|  ||   |  \ / __ \_|  |__   |  ||  |__|  |__|   |  \\  ___/  \___ \  \___ \ 
+ |__|   \___  > |__|   |__|_|  /|__||___|  /(____  /|____/   |__||____/|____/|___|  / \___  >/____  >/____  >
+			\/               \/          \/      \/                               \/      \/      \/      \/ 
 `
+
+	SendButton = `\\\\\\\\\\\\\\\\\\
+\\		      \\
+\\     Send     \\
+\\    Request   \\
+\\			  \\
+\\\\\\\\\\\\\\\\\\`
 	AuthorStyle         = lipgloss.NewStyle().Foreground(lipgloss.Color("235"))
 	FocusedStyle        = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
 	BlurredStyle        = lipgloss.NewStyle().Foreground(lipgloss.Color("240"))
@@ -28,8 +34,8 @@ var (
 	HelpStyle           = BlurredStyle
 	CursorModeHelpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("244"))
 
-	FocusedButton = FocusedStyle.Render("[ Submit ]")
-	BlurredButton = fmt.Sprintf("[ %s ]", BlurredStyle.Render("Submit"))
+	FocusedButton = FocusedStyle.Render("[ Run Test ]")
+	BlurredButton = fmt.Sprintf("[ %s ]", BlurredStyle.Render("Run Test"))
 )
 
 // Function to clear the terminal screen
@@ -41,3 +47,18 @@ func ClearTerminal() {
 	cmd.Stdout = os.Stdout
 	cmd.Run()
 }
+
+// "
+// 	        ______
+//         .-"      "-.
+//        /            \
+//       |              |
+//       |,  .-.  .-.  ,|
+//       | )(__/  \__)( |
+//       |/     /\     \|
+//       (_     ^^     _)
+//        \__|IIIIII|__/
+//         | \\IIIIII/ |
+//         \\          /
+//          `--------`
+//   "
