@@ -43,10 +43,13 @@ func (m SendRequestModel) View() string {
 		Padding(1)
 
 	buttonStyle := utils.AuthorStyle
+	buttonText := utils.SendButton // Default unfocused text
+
 	if m.focused {
 		buttonStyle = buttonStyle.Copy().Foreground(lipgloss.Color("205"))
 		style = style.BorderForeground(lipgloss.Color("205"))
+		//buttonText = utils.Pp // Focused text
 	}
 
-	return style.Render(buttonStyle.Render(utils.SendButton))
+	return style.Render(buttonStyle.Render(buttonText))
 }

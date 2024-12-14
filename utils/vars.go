@@ -26,6 +26,20 @@ _/  |_   ____  _______   _____  |__|  ____  _____   |  |     |__||  |  |  |    _
 \\    Request   \\
 \\			  \\
 \\\\\\\\\\\\\\\\\\`
+
+	P = `        ___
+	  /	 \
+    / (-) (-) \
+   |    ( )    |
+    __ (---) __
+	    \-/	  `
+	Pp = `         _
+	    / \
+	/(O>) (<O)\
+   |   (o o)   |
+	__ (---) __
+		\-/	  `
+
 	AuthorStyle         = lipgloss.NewStyle().Foreground(lipgloss.Color("235"))
 	FocusedStyle        = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
 	BlurredStyle        = lipgloss.NewStyle().Foreground(lipgloss.Color("240"))

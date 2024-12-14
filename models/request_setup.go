@@ -34,15 +34,23 @@ func InitialSetupModel(selected int) SetupModel {
 			t.Prompt = "Target: "
 			t.TextStyle = utils.CursorModeHelpStyle.Italic(true)
 			t.CompletionStyle = utils.CursorModeHelpStyle
+			t.SetSuggestions(utils.GetSavedURLs())
+			t.ShowSuggestions = true
 		case 1:
 			t.Prompt = "Method: "
 			t.Placeholder = "Get"
 			t.CharLimit = 64
+			t.SetSuggestions([]string{"GET", "POST", "PUT", "PATCH", "DELETE"})
+			t.ShowSuggestions = true
+			t.CompletionStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("241"))
+			t.TextStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("white")).Bold(true)
 		case 2:
 			t.Placeholder = "••••••••"
 			t.Prompt = "Bearer Token: "
 			t.EchoMode = textinput.EchoPassword
 			t.EchoCharacter = '•'
+			t.Width = 30
+			t.CharLimit = 64
 		}
 
 		m.inputs[i] = t

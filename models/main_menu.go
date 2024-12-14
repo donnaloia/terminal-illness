@@ -127,9 +127,24 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 		case "left":
 			if m.focus == "setup" {
-				m.focus = "sidebar"
+				if setupModel, ok := m.second.(SetupModel); ok {
+					// Get the current input value
+					currentValue := setupModel.inputs[setupModel.selected].Value()
 
-			} else if m.focus == "third" { // Add this section
+					// If we're at the start of the input (empty) and it's the first field
+					if len(currentValue) == 0 && setupModel.selected == 0 {
+						setupModel.Blur()
+						m.focus = "sidebar"
+						m.second = setupModel
+						return m, nil
+					}
+
+					// Otherwise, let the input handle the left arrow key
+					updatedModel, cmd := setupModel.Update(msg)
+					m.second = updatedModel.(SetupModel)
+					return m, cmd
+				}
+			} else if m.focus == "third" {
 				m.focus = "setup"
 				m.third.Blur()
 				if setupModel, ok := m.second.(SetupModel); ok {
@@ -165,7 +180,7 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "esc":
 			m.showOverlay = false
 			return m, nil
-		case "home", "g":
+		case "home":
 			if m.showOverlay {
 				m.viewport.GotoTop()
 			}
@@ -259,7 +274,7 @@ func (m MainModel) View() string {
 		content := lipgloss.JoinVertical(lipgloss.Left,
 			headerStyle.Render("Test Results"),
 			dividerStyle,
-			fmt.Sprintf("Endpoint: %s", m.currentURL),
+			fmt.Sprintf("Endpoint: %s", lipgloss.NewStyle().Foreground(lipgloss.Color("223")).Render(m.currentURL)),
 			fmt.Sprintf("Status: %s", statusStyle.Render(m.status)),
 			fmt.Sprintf("Duration: %s", durationStyle.Render(fmt.Sprintf("%dms", m.requestDuration.Milliseconds()))),
 			"Body:",
@@ -305,7 +320,7 @@ type Model interface {
 func InitialModel() MainModel {
 	m := MainModel{
 		first:  SidebarModel{options: []string{"Paranoia (API Client Test)", "Schizophrenia (API Security Audit)", "PTSD (API Load Test)", "Settings", "Quit"}},
-		second: InitialSetupModel(-1),
+		second: InitialSetupModel(0),
 		third:  SendRequestModel{},
 		focus:  "sidebar",
 	}

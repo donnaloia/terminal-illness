@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"terminal-illness/utils"
 	"time"
 )
 
@@ -68,6 +69,10 @@ func MakeRequest(url string, method HTTPMethod, bearerToken string) (*http.Respo
 // Helper function to read response body
 func ReadResponse(resp *http.Response) (string, error) {
 	defer resp.Body.Close()
+	responseURL := resp.Request.URL.String()
+	if err := utils.SaveURL(responseURL); err != nil {
+		// Handle error if needed
+	}
 
 	body, err := io.ReadAll(resp.Body)
 

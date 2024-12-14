@@ -39,10 +39,11 @@ func InitialAuditSetupModel(selected int) AuditSetupModel {
 			t.Placeholder = "Get"
 			t.CharLimit = 64
 		case 2:
-			t.Placeholder = "••••••••"
+			t.Placeholder = "test"
 			t.Prompt = "Audit Field: "
-			t.EchoMode = textinput.EchoPassword
-			t.EchoCharacter = '•'
+			t.CharLimit = 50
+			t.Width = 20
+
 		}
 
 		m.inputs[i] = t

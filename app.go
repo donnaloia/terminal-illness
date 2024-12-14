@@ -15,8 +15,13 @@ import (
 // Main function to run the menu
 func main() {
 	utils.ClearTerminal() // Clear the terminal before starting the application
-	menu := models.InitialModel()
-	if _, err := tea.NewProgram(menu).Run(); err != nil {
+	menu := models.InitialLoadingModel()
+	p := tea.NewProgram(menu,
+		tea.WithAltScreen(),       // Use alternate screen buffer
+		tea.WithMouseCellMotion(), // Enable mouse support
+	)
+
+	if _, err := p.Run(); err != nil {
 		fmt.Printf("could not start program: %s\n", err)
 		os.Exit(1)
 	}

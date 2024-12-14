@@ -38,11 +38,12 @@ func InitialLoadSetupModel(selected int) LoadSetupModel {
 			t.Prompt = "Method: "
 			t.Placeholder = "Get"
 			t.CharLimit = 64
+			t.Width = 40
 		case 2:
-			t.Placeholder = "••••••••"
-			t.Prompt = "Bearer Token: "
-			t.EchoMode = textinput.EchoPassword
-			t.EchoCharacter = '•'
+			t.Placeholder = "test"
+			t.Prompt = "Load Test Field: "
+			t.CharLimit = 50
+			t.Width = 20
 		}
 
 		m.inputs[i] = t
@@ -97,19 +98,22 @@ func (m LoadSetupModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.selected = len(m.inputs)
 			}
 
-			cmds := make([]tea.Cmd, len(m.inputs))
-			for i := 0; i <= len(m.inputs)-1; i++ {
+			var cmds []tea.Cmd
+			// Only create blink cmd for the focused input
+			for i := range m.inputs {
 				if i == m.selected {
 					// Set focused state
-					cmds[i] = m.inputs[i].Focus()
+					cmds = append(cmds, m.inputs[i].Focus())
 					m.inputs[i].PromptStyle = utils.FocusedStyle
 					m.inputs[i].TextStyle = utils.FocusedStyle
-					continue
+					// Add the blink command
+					cmds = append(cmds, textinput.Blink)
+				} else {
+					// Remove focused state
+					m.inputs[i].Blur()
+					m.inputs[i].PromptStyle = utils.NoStyle
+					m.inputs[i].TextStyle = utils.NoStyle
 				}
-				// Remove focused state
-				m.inputs[i].Blur()
-				m.inputs[i].PromptStyle = utils.NoStyle
-				m.inputs[i].TextStyle = utils.NoStyle
 			}
 
 			return m, tea.Batch(cmds...)
@@ -118,19 +122,21 @@ func (m LoadSetupModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	// Handle character input and blinking
 	cmd := m.updateInputs(msg)
-
 	return m, cmd
 }
 
 func (m *LoadSetupModel) updateInputs(msg tea.Msg) tea.Cmd {
-	var cmds []tea.Cmd
+	cmds := make([]tea.Cmd, 0)
 
 	if m.selected >= 0 && m.selected < len(m.inputs) {
 		// Update the focused input and collect its command
-		var cmd tea.Cmd
-		m.inputs[m.selected], cmd = m.inputs[m.selected].Update(msg)
+		newInput, cmd := m.inputs[m.selected].Update(msg)
+		m.inputs[m.selected] = newInput
+
 		if cmd != nil {
 			cmds = append(cmds, cmd)
+			// Add blink command for the active input
+			cmds = append(cmds, textinput.Blink)
 		}
 	}
 
